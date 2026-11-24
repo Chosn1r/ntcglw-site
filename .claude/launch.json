@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "ntcglw-site",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["serve.mjs"],
+      "port": 5190
+    }
+  ]
+}
