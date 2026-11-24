@@ -33,6 +33,8 @@ for (const img of document.querySelectorAll('.case img')) {
   const broken = () => img.closest('.case').classList.add('case-broken');
   img.addEventListener('error', broken);
   if (img.complete && img.naturalWidth === 0 && img.currentSrc) broken();
+  // HTTPS 页面里浏览器不会加载 HTTP 图片，也不一定触发 error，直接显示占位
+  if (location.protocol === 'https:' && img.getAttribute('src').startsWith('http:')) broken();
 }
 
 // 报名表：带入项目名、校验。演示版还没有接后台，不会真的提交。
