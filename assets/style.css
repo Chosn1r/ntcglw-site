@@ -56,6 +56,8 @@ button, input, select { font: inherit; color: inherit; }
 .link { display: inline-flex; align-items: center; gap: 6px; color: var(--blue); font-weight: 600; }
 .link:hover { text-decoration: underline; }
 
+.demo-bar { padding: 6px 16px; background: #fff3d6; color: #6b4a08; font-size: 13px; text-align: center; }
+
 /* 顶部 */
 .topbar { background: var(--navy); color: #c9d6ea; font-size: 13px; }
 .topbar .wrap { display: flex; justify-content: space-between; gap: 16px; padding-top: 7px; padding-bottom: 7px; }
@@ -147,7 +149,9 @@ button, input, select { font: inherit; color: inherit; }
 .case img { width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; background: #dfe5ee; }
 .case figcaption { padding: 10px 12px 12px; font-size: 14.5px; line-height: 1.4; }
 .case time { display: block; font-size: 12.5px; color: var(--muted); }
+.case-broken { position: relative; }
 .case-broken img { visibility: hidden; }
+.case-broken::before { content: "照片待迁移"; position: absolute; inset: 0 0 auto 0; aspect-ratio: 3 / 4; display: grid; place-items: center; color: var(--muted); font-size: 13px; }
 
 /* 简介 */
 .about-brief { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }

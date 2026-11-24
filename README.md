@@ -23,6 +23,12 @@ dist/             生成结果，改内容后重新生成，不要手改
 
 改招工信息：编辑 `data/jobs.json` 后重新运行 `node build.mjs`。
 
+## 线上预览
+
+推送到 `main` 后，GitHub Actions 会自动生成页面并发布到 GitHub Pages。
+
+`data/site.json` 里的 `"demo": true` 会在每页顶部显示“设计样稿”提示，并告诉搜索引擎不要收录。正式上线到公司域名时改成 `false`。
+
 ## 还没做的
 
 - 报名表没有接后台，点提交只做校验，不会发出去

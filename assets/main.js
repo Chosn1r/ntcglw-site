@@ -30,7 +30,9 @@ if (list && buttons.length) {
 
 // 照片加载失败时不留破图
 for (const img of document.querySelectorAll('.case img')) {
-  img.addEventListener('error', () => img.closest('.case').classList.add('case-broken'));
+  const broken = () => img.closest('.case').classList.add('case-broken');
+  img.addEventListener('error', broken);
+  if (img.complete && img.naturalWidth === 0 && img.currentSrc) broken();
 }
 
 // 报名表：带入项目名、校验。演示版还没有接后台，不会真的提交。

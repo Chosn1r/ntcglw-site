@@ -32,11 +32,11 @@ function layout(site, { title, description, active, body, depth = 0 }) {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description || site.description)}">
-<meta name="keywords" content="${esc(site.keywords)}">
+<meta name="keywords" content="${esc(site.keywords)}">${site.demo ? '\n<meta name="robots" content="noindex, nofollow">' : ''}
 <link rel="stylesheet" href="${p}assets/style.css">
 </head>
 <body>
-<a class="skip" href="#main">跳到正文</a>
+<a class="skip" href="#main">跳到正文</a>${site.demo ? `\n<div class="demo-bar">设计样稿，不是官方网站，内容仅供预览。官方网站：${esc(site.domains[0])}</div>` : ''}
 <div class="topbar"><div class="wrap">
   <span>国家商务部核发《对外劳务合作经营资格证书》 编号 ${esc(site.license)}</span>
   <span class="topbar-tel">咨询电话 ${site.tels.map(esc).join(' / ')}</span>
