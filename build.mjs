@@ -1,10 +1,13 @@
 // 把 data/ 里的内容生成为 dist/ 下的静态网页。运行：node build.mjs
 import { readFileSync, writeFileSync, mkdirSync, rmSync, cpSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { dirname, join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const root = dirname(fileURLToPath(import.meta.url));
 const readJson = (f) => JSON.parse(readFileSync(join(root, 'data', f), 'utf8'));
+// 样式和脚本的地址带上内容指纹，改动后访客的浏览器不会继续用旧缓存
+const ver = (f) => createHash('sha1').update(readFileSync(join(root, 'assets', f))).digest('hex').slice(0, 8);
 
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const COUNTRY = { jp: '日本', sg: '新加坡' };
@@ -33,7 +36,7 @@ function layout(site, { title, description, active, body, depth = 0 }) {
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description || site.description)}">
 <meta name="keywords" content="${esc(site.keywords)}">${site.demo ? '\n<meta name="robots" content="noindex, nofollow">' : ''}
-<link rel="stylesheet" href="${p}assets/style.css">
+<link rel="stylesheet" href="${p}assets/style.css?v=${ver('style.css')}">
 </head>
 <body>
 <a class="skip" href="#main">跳到正文</a>${site.demo ? `\n<div class="demo-bar">设计样稿，不是官方网站，内容仅供预览。官方网站：${esc(site.domains[0])}</div>` : ''}
@@ -80,7 +83,7 @@ ${body}
   <a href="tel:${tel}">${icon.phone}<span>电话咨询</span></a>
   <a class="dock-main" href="${p}apply.html">在线报名</a>
 </div>
-<script src="${p}assets/main.js" defer></script>
+<script src="${p}assets/main.js?v=${ver('main.js')}" defer></script>
 </body>
 </html>
 `;
